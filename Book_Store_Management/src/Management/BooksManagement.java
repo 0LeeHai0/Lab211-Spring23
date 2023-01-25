@@ -264,6 +264,7 @@ public class BooksManagement extends ArrayList<Books> {
                  this.set(target, input);
             System.out.println("Updated success!");
              }else{
+                 input = null;
                  System.err.println("Updated fail!");
              }
         } else {
