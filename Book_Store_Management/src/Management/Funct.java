@@ -3,6 +3,7 @@ package Management;
 public class Funct {
 
     public int menuMain() {
+        Runtime.getRuntime().gc();
         int choice;
         System.out.println("+----------------------------------+");
         System.out.println("|       BOOK STORE MANAGEMENT      |");
@@ -14,17 +15,23 @@ public class Funct {
         System.out.println("+----------------------------------+");
 
         while (true) {
+            pubList.clear();
+            bookList.clear();
             choice = Validation.getInt(1, 3);
             switch (choice) {
                 case 1:
                     pubList.readFromFile();
                     publisherMenu();
+                    pubList.clear();
                     return 0;
                 case 2:
                     bookList.readFromBookFile();
                     bookMenu();
+                    bookList.clear();
                     return 0;
                 case 3:
+                    pubList.clear();
+                    bookList.clear();
                     System.out.println("+----------------------+");
                     System.out.println("| Thank you for using! |");
                     System.out.println("+----------------------+");
@@ -36,6 +43,7 @@ public class Funct {
     PublisherManagement pubList = new PublisherManagement();
 
     private int publisherMenu() {
+        Runtime.getRuntime().gc();
         int choice;
         System.out.println("PUBLISHERS MANAGEMENT");
         System.out.println("+--------------------------------------------+");
@@ -63,16 +71,16 @@ public class Funct {
                     return publisherMenu();
                 case 3:
                     pubList.saveToFile();
-                    if(Validation.getYN()==true){
+                    if (Validation.getYN() == true) {
                         return publisherMenu();
-                    }else{
+                    } else {
                         return menuMain();
                     }
                 case 4:
                     pubList.layoutForPublisher();
-                    if(Validation.getYN()==true){
+                    if (Validation.getYN() == true) {
                         return publisherMenu();
-                    }else{
+                    } else {
                         return menuMain();
                     }
                 case 0:
@@ -85,6 +93,7 @@ public class Funct {
     BooksManagement bookList = new BooksManagement();
 
     private int bookMenu() {
+        Runtime.getRuntime().gc();
         int choice;
         System.out.println("BOOKS MANAGEMENT");
         System.out.println("+--------------------------------------------+");
@@ -104,9 +113,9 @@ public class Funct {
             switch (choice) {
                 case 1:
                     bookList.createBook();
-                    if(Validation.getYN()==true){
+                    if (Validation.getYN() == true) {
                         return bookMenu();
-                    }else{
+                    } else {
                         return menuMain();
                     }
                 case 2:
@@ -120,16 +129,16 @@ public class Funct {
                     return bookMenu();
                 case 5:
                     bookList.saveToFile();
-                    if(Validation.getYN()==true){
+                    if (Validation.getYN() == true) {
                         return bookMenu();
-                    }else{
+                    } else {
                         return menuMain();
                     }
                 case 6:
                     bookList.layoutForBook();
-                    if(Validation.getYN()==true){
+                    if (Validation.getYN() == true) {
                         return bookMenu();
-                    }else{
+                    } else {
                         return menuMain();
                     }
                 case 0:

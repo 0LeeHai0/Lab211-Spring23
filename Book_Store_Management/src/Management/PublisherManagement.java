@@ -132,8 +132,6 @@ public class PublisherManagement extends ArrayList<Publishers> {
             if (!f.exists()) {
                 throw new Exception();
             }
-
-            newList.clear();
             FileReader fr = new FileReader(f);
             BufferedReader br = new BufferedReader(fr);
             while (true) {
@@ -161,6 +159,7 @@ public class PublisherManagement extends ArrayList<Publishers> {
             for (Publishers p : newList) {
                 System.out.print(p);
             }
+            newList.clear();
         }
     }
 

@@ -218,7 +218,6 @@ public class BooksManagement extends ArrayList<Books> {
             if (!f.exists()) {
                 throw new Exception();
             }
-            newList.clear();
             FileReader fr = new FileReader(f);
             BufferedReader br = new BufferedReader(fr);
             while (true) {
@@ -242,6 +241,7 @@ public class BooksManagement extends ArrayList<Books> {
             fr.close();
         } catch (Exception e) {
             System.err.println("Error input file.");
+            return;
         }
         if (newList.isEmpty()) {
             System.err.println("Nothing to display!");
@@ -250,6 +250,7 @@ public class BooksManagement extends ArrayList<Books> {
             for (Books p : newList) {
                 System.out.print(p);
             }
+            newList.clear();
         }
     }
 
