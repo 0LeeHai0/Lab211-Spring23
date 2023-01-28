@@ -1,9 +1,7 @@
 package Management;
 
 public class Funct {
-
     public int menuMain() {
-        Runtime.getRuntime().gc();
         int choice;
         System.out.println("+----------------------------------+");
         System.out.println("|       BOOK STORE MANAGEMENT      |");
@@ -43,7 +41,6 @@ public class Funct {
     PublisherManagement pubList = new PublisherManagement();
 
     private int publisherMenu() {
-        Runtime.getRuntime().gc();
         int choice;
         System.out.println("PUBLISHERS MANAGEMENT");
         System.out.println("+--------------------------------------------+");
@@ -93,7 +90,6 @@ public class Funct {
     BooksManagement bookList = new BooksManagement();
 
     private int bookMenu() {
-        Runtime.getRuntime().gc();
         int choice;
         System.out.println("BOOKS MANAGEMENT");
         System.out.println("+--------------------------------------------+");

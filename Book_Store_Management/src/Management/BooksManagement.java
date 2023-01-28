@@ -62,18 +62,18 @@ public class BooksManagement extends ArrayList<Books> {
     Books inputBook() {
         Books obj = new Books();
         System.out.println("Publisher's ID(Pxxxxx): ");
-        obj.setPublisherID(Validation.getWithRegex("[P][0-9]{5}"));
+        obj.setPublisherID(Validation.getWithRegex("[P,p][0-9]{5}").toUpperCase());
         findBookID(obj.getPublisherID());
         while (findPubID(obj.getpublisherID()) == -1) {
             System.err.println("Publisher’s Id is not found");
-            obj.setPublisherID(Validation.getWithRegex("[P][0-9]{5}"));
+            obj.setPublisherID(Validation.getWithRegex("[P,p][0-9]{5}").toUpperCase());
         }
 
         System.out.println("Book's ID(Bxxxxx): ");
-        obj.setBookID(Validation.getWithRegex("[B][0-9]{5}"));
+        obj.setBookID(Validation.getWithRegex("[B,b][0-9]{5}").toUpperCase());
         while (findBookID(obj.getBookID()) > -1) {
             System.err.println("Duplicate ID");
-            obj.setBookID(Validation.getWithRegex("[B][0-9]{5}"));
+            obj.setBookID(Validation.getWithRegex("[B,b][0-9]{5}").toUpperCase());
         }
 
         System.out.println("Book's name: ");
@@ -94,11 +94,11 @@ public class BooksManagement extends ArrayList<Books> {
     Books inputToUpdateBook(String bookID) {
         Books obj = new Books();
         System.out.println("Publisher's ID(Pxxxxx): ");
-        obj.setPublisherID(Validation.getWithRegex("[P][0-9]{5}"));
+        obj.setPublisherID(Validation.getWithRegex("[P,p][0-9]{5}").toUpperCase());
         findBookID(obj.getPublisherID());
         while (findPubID(obj.getpublisherID()) == -1) {
             System.err.println("Publisher’s Id is not found");
-            obj.setPublisherID(Validation.getWithRegex("[P][0-9]{5}"));
+            obj.setPublisherID(Validation.getWithRegex("[P,p][0-9]{5}").toUpperCase());
         }
         
         obj.setBookID(bookID);
@@ -150,7 +150,7 @@ public class BooksManagement extends ArrayList<Books> {
                     }
                 case 2:
                     System.out.println("Enter Publisher's ID: ");
-                    findAndPrintPubID(Validation.getWithRegex("[P][0-9]{5}"));
+                    findAndPrintPubID(Validation.getWithRegex("[P,p][0-9]{5}").toUpperCase());
                     if (Validation.getYN() == true) {
                         return sreachTheBook();
                     } else {
@@ -256,7 +256,7 @@ public class BooksManagement extends ArrayList<Books> {
 
     public void updateBook() {
         System.out.println("Enter Book's ID to update:");
-        String ID = Validation.getWithRegex("[B][0-9]{5}");
+        String ID = Validation.getWithRegex("[B,b][0-9]{5}").toUpperCase();
         int target = findBookID(ID);
         if (target > -1) {
              Books input = this.inputToUpdateBook(ID);
@@ -275,7 +275,7 @@ public class BooksManagement extends ArrayList<Books> {
 
     void deleteBook() {
         System.out.println("Enter the Book’s ID: ");
-        String ID = Validation.getWithRegex("[B][0-9]{5}");
+        String ID = Validation.getWithRegex("[B,b][0-9]{5}").toUpperCase();
         int target = findBookID(ID);
         if (target > -1) {
             System.out.println("The Book will be delete!");

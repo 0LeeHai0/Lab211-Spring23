@@ -45,10 +45,10 @@ public class PublisherManagement extends ArrayList<Publishers> {
         Publishers obj = new Publishers();
 
         System.out.println("Publisher's ID(Pxxxxx): ");
-        obj.setpublisherID(Validation.getWithRegex("[P][0-9]{5}"));
+        obj.setpublisherID(Validation.getWithRegex("[P,p][0-9]{5}").toUpperCase());
         while (findID(obj.getpublisherID()) > -1) {
             System.err.println("Duplicate ID");
-            obj.setpublisherID(Validation.getWithRegex("[P][0-9]{5}"));
+            obj.setpublisherID(Validation.getWithRegex("[P,p][0-9]{5}").toUpperCase());
         }
 
         System.out.println("Publisher's name: ");
@@ -62,7 +62,7 @@ public class PublisherManagement extends ArrayList<Publishers> {
 
     void deletePublisher() {
         System.out.println("Enter Publisher's ID to remove:");
-        String ID = Validation.getWithRegex("[P][0-9]{5}");
+        String ID = Validation.getWithRegex("[P,p][0-9]{5}").toUpperCase();
         int target = findID(ID);
         if (target > -1 && findBookPublisherID(ID) == -1) {
             System.out.println("The Publisher will be deleted!");
