@@ -90,32 +90,40 @@ public class BooksManagement extends ArrayList<Books> {
 
         return obj;
     }
-    
+
     Books inputToUpdateBook(String bookID) {
         Books obj = new Books();
-        System.out.println("Publisher's ID(Pxxxxx): ");
-        obj.setPublisherID(Validation.getWithRegex("[P,p][0-9]{5}").toUpperCase());
-        findBookID(obj.getPublisherID());
-        while (findPubID(obj.getpublisherID()) == -1) {
-            System.err.println("Publisher’s Id is not found");
-            obj.setPublisherID(Validation.getWithRegex("[P,p][0-9]{5}").toUpperCase());
+        try {
+            System.out.println("Publisher's ID(Pxxxxx): ");
+            obj.setPublisherID(Validation.getWithRegex("[P,p][0-9]{5}||[ ]").toUpperCase());
+            if (obj.getPublisherID().isEmpty()) {
+                throw new Exception();
+            }
+            findBookID(obj.getPublisherID());
+            while (findPubID(obj.getpublisherID()) == -1) {
+                System.err.println("Publisher’s Id is not found");
+                obj.setPublisherID(Validation.getWithRegex("[P,p][0-9]{5}||[ ]").toUpperCase());
+            }
+
+            obj.setBookID(bookID);
+
+            System.out.println("Book's name: ");
+            obj.setBookName(Validation.getWithRegex("[A-Z,a-z,0-9, ]{5,30}"));
+
+            System.out.println("Book's price: ");
+            obj.setBookPrice(Validation.getReal(0));
+
+            System.out.println("Book's quantity: ");
+            obj.setQuantity(Validation.getInt(1, Integer.MAX_VALUE));
+
+            System.out.println("Status(A/NA): ");
+            obj.setStatus(Validation.getStatus());
+
+            return obj;
+
+        } catch (Exception e) {
+            return obj = null;
         }
-        
-        obj.setBookID(bookID);
-
-        System.out.println("Book's name: ");
-        obj.setBookName(Validation.getWithRegex("[A-Z,a-z,0-9, ]{5,30}"));
-
-        System.out.println("Book's price: ");
-        obj.setBookPrice(Validation.getReal(0));
-
-        System.out.println("Book's quantity: ");
-        obj.setQuantity(Validation.getInt(1, Integer.MAX_VALUE));
-
-        System.out.println("Status(A/NA): ");
-        obj.setStatus(Validation.getStatus());
-
-        return obj;
     }
 
     void printFromList(int index) {
@@ -259,15 +267,18 @@ public class BooksManagement extends ArrayList<Books> {
         String ID = Validation.getWithRegex("[B,b][0-9]{5}").toUpperCase();
         int target = findBookID(ID);
         if (target > -1) {
-             Books input = this.inputToUpdateBook(ID);
-             System.out.println("The Book will be update!");
-             if(Validation.getYN()==true){
-                 this.set(target, input);
-            System.out.println("Updated success!");
-             }else{
-                 input = null;
-                 System.err.println("Updated fail!");
-             }
+            Books input = this.inputToUpdateBook(ID);
+            if(input == null){System.err.println("Updated fail");}
+            else{
+                System.out.println("The Book will be update!");
+            if (Validation.getYN() == true) {
+                this.set(target, input);
+                System.out.println("Updated success!");
+            } else {
+                input = null;
+                System.err.println("Updated fail!");
+            }
+            }
         } else {
             System.out.println("Book’s Name does not exist");
         }
@@ -282,8 +293,7 @@ public class BooksManagement extends ArrayList<Books> {
             if (Validation.getYN() == true) {
                 this.remove(target);
                 System.out.println("Book was deleted.");
-            } 
-            else {
+            } else {
                 System.err.println("The Book was not deleted.");
             }
         } else {
