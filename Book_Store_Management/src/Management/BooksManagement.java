@@ -17,9 +17,15 @@ public class BooksManagement extends ArrayList<Books> {
     }
 
     void createBook() {
+        PublisherManagement pubMan = new PublisherManagement();
+        pubMan.readFromFile();
+        if(pubMan.isEmpty()){
+            System.err.println("There is no publisher in list!");
+        }else{
         this.add(inputBook());
         System.out.println("Created!");
-    }
+            }
+        }
 
     int findBookID(String ID) {
         for (int i = 0; i < this.size(); i++) {
