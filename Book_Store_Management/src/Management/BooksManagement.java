@@ -13,19 +13,22 @@ import obj.Books;
 
 public class BooksManagement extends ArrayList<Books> {
 
+    PublisherManagement pubMan = new PublisherManagement();
+
     public BooksManagement() {
+
     }
 
     void createBook() {
-        PublisherManagement pubMan = new PublisherManagement();
         pubMan.readFromFile();
-        if(pubMan.isEmpty()){
+        if (pubMan.isEmpty()) {
+            System.out.println();
             System.err.println("There is no publisher in list!");
-        }else{
-        this.add(inputBook());
-        System.out.println("Created!");
-            }
+        } else {
+            this.add(inputBook());
+            System.out.println("Created!");
         }
+    }
 
     int findBookID(String ID) {
         for (int i = 0; i < this.size(); i++) {
@@ -37,7 +40,6 @@ public class BooksManagement extends ArrayList<Books> {
     }
 
     int findPubID(String ID) {
-        PublisherManagement pubMan = new PublisherManagement();
         pubMan.readFromFile();
         for (int i = 0; i < pubMan.size(); i++) {
             if (pubMan.get(i).getpublisherID().equals(ID)) {
@@ -48,12 +50,17 @@ public class BooksManagement extends ArrayList<Books> {
     }
 
     int findAndPrintPubID(String ID) {
-        for (int i = 0; i < this.size(); i++) {
-            if (this.get(i).getpublisherID().equals(ID)) {
-                printFromList(i);
+        if (this.isEmpty()) {
+            System.err.println("Have no any Book!");
+        } else {
+            for (int i = 0; i < this.size(); i++) {
+                if (this.get(i).getpublisherID().equals(ID)) {
+                    printFromList(i);
+                }
             }
         }
         return -1;
+
     }
 
     public int findBookName(String name) {
@@ -274,19 +281,19 @@ public class BooksManagement extends ArrayList<Books> {
         int target = findBookID(ID);
         if (target > -1) {
             Books input = this.inputToUpdateBook(ID);
-            if(input == null){System.err.println("Updated fail");}
-            else{
-                System.out.println("The Book will be update!");
-            if (Validation.getYN() == true) {
-                this.set(target, input);
-                System.out.println("Updated success!");
+            if (input == null) {
+                System.err.println("Updated fail");
             } else {
-                input = null;
-                System.err.println("Updated fail!");
-            }
+                System.out.println("The Book will be update!");
+                if (Validation.getYN() == true) {
+                    this.set(target, input);
+                    System.out.println("Updated success!");
+                } else {
+                    System.err.println("Updated fail!");
+                }
             }
         } else {
-            System.out.println("Book’s Name does not exist");
+            System.err.println("Book’s Name does not exist");
         }
     }
 
